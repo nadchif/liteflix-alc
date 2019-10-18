@@ -1,0 +1,77 @@
+<div class="landingPage">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6">
+                <img src="../../assets/img/liteflix.png" class="logo">
+            </div>
+            <div class="col-xs-6 align-right">
+                <button mat-raised-button color="accent" (click)="loginWithGoogle()">Sign In</button>
+            </div>
+        </div>
+        <div class="flexparent">
+
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h1>
+                        Watch Your Movies Anywhere </h1>
+                    <br>
+                    <br>
+                    <h3 class="med-bold">
+                        Watch on your Android Phone, iPhone, iPad, Mac, Linux, Windows and More...
+                    </h3>
+                    <hr>
+                    <button mat-raised-button color="accent" (click)="loginWithGoogle()" [style.font-size]="'1.5em'">
+                        Watch Now!  <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                    </button>
+<br><br>
+                </div>
+                <div class="col-md-offset-2 col-md-4">
+                    <div class="screenWrapper">
+                                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                      <ol class="carousel-indicators">
+                                        <li *ngFor="let movie of this.selection" data-target="#myCarousel"></li>
+                                      </ol>
+                                  
+                                      <div class="carousel-inner">
+                                  
+                                        <div *ngFor="let movie of this.selection; let i = index" class="item {{i == 0? 'active' : ''}}">
+                                          <img src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}"  alt="{{movie.title}}" style="width:100%;">
+                                          <div class="carousel-caption">
+                                            <h3>{{movie.title}}</h3>
+                                            <p>{{movie.release_date | date}}</p>
+                                          </div>
+                                        </div>
+                                  
+                                       
+                                      
+                                        
+                                      </div>
+                                  
+                                  
+                                    </div>
+                    
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="breaker"></div>
+<hr>
+    <footer>
+            <h4>More Information</h4>
+            <div class="row">
+                <div class="col-sm-4">
+                    <a routerLink="github">Project Source Code</a>
+                </div>
+                <div class="col-sm-4">
+                    <a routerLink="github">Dev's Website</a>
+                </div>
+                <div class="col-sm-4">
+                    <a routerLink="github">Andela Website</a>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+</div>

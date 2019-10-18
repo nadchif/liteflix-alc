@@ -1,0 +1,40 @@
+<mat-toolbar color="primary" fullscreen>
+    <mat-toolbar-row>
+        <div class="row" [style.width]="'100%'">
+            <div class="col-xs-6">
+                <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+                    <span class="glyphicon glyphicon-menu-hamburger" [style.font-size]="'14pt'" aria-hidden="true"></span>
+                </button>
+                <img src="../../assets/img/liteflix.png" [style.height]="'32px'">
+            </div>
+            <div class="col-xs-6 align-right">
+                <mat-form-field class="hidden-xs">
+                    <mat-label>Search...</mat-label>
+                    <input matInput  [(ngModel)]="this.searchQuery" >
+                    <button mat-button color="accent" (click)="navToSearch()"matSuffix><span class="glyphicon glyphicon-search"
+                            aria-hidden="true"></span></button>
+                </mat-form-field>
+                <button mat-button  [matMenuTriggerFor]="menu">
+                    <div class="avatarWrapper">
+                        <img src="{{user.photoURL}}"><span class="hidden-xs">
+                            {{user.displayName}}
+                        </span><span class="caret"></span>
+                    </div>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item>Favorites</button>
+                    <button mat-menu-item>Account Settings</button>
+                    <button mat-menu-item (click)='logout()'>Sign out</button>
+                </mat-menu>
+            </div>
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>
+<mat-sidenav-container class="example-container" [style.min-height]="'100vh'">
+    <mat-sidenav #drawer mode="side"  role="navigation">
+        <app-navbar></app-navbar>
+    </mat-sidenav>
+    <mat-sidenav-content [style.min-height]="'100%'" [style.overflow-x]="'hidden'">
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

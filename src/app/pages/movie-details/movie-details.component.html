@@ -1,0 +1,48 @@
+<div class="content row">
+    <div class="col-xs-12">
+        <button mat-button (click)="navBack()" color="warn">
+            <small>
+                    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+
+            </small>
+             Go Back</button>
+    </div>
+    <div *ngIf="this.movie">
+    <div class="col-md-6 descriptionSection">
+        <h1>{{this.movieData.title}} ({{this.movieData.release_date.split('-')[0]}})</h1>
+        <span class="glyphicon {{this.movieData.vote_average > 1.5 ? 'glyphicon-star' : 'glyphicon-star-empty'}}" aria-hidden="true"></span>
+        <span class="glyphicon  {{this.movieData.vote_average > 3.5 ? 'glyphicon-star' : 'glyphicon-star-empty'}}"  aria-hidden="true"></span>
+        <span class="glyphicon  {{this.movieData.vote_average > 5.5 ? 'glyphicon-star' : 'glyphicon-star-empty'}}" aria-hidden="true"></span>
+        <span class="glyphicon  {{this.movieData.vote_average > 7.5 ? 'glyphicon-star' : 'glyphicon-star-empty'}}" aria-hidden="true"></span>
+        <span class="glyphicon  {{this.movieData.vote_average > 9.5 ? 'glyphicon-star' : 'glyphicon-star-empty'}}" aria-hidden="true"></span>
+        <br>
+        <h4>{{this.movieData.runtime}} min</h4>
+        <br><mat-chip-list>
+                <mat-chip *ngFor="let genre of this.movieData.genres" color="accent" [disabled]='true'>{{genre.name}}</mat-chip>
+              </mat-chip-list>
+              <hr>
+             {{this.movieData.overview}}
+              <br>
+              <br>
+              <button mat-raised-button type="button" color="primary" [style.font-size]="'14pt'" (click)="this.moviesService.watchTrailer(this.movieData)"> 
+                  <small>
+                        <span
+                        class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                  </small> Watch Trailer </button>
+&nbsp;&nbsp;
+              <button mat-raised-button type="button" color="accent" [style.font-size]="'14pt'" (click)="this.toggleFavorite(this.movieData)"> 
+                   {{!this.favorites.includes(this.movieData.id)? '+ Add to Favorites' : '- Remove Favorite'}}</button>
+
+    </div>
+    <div class="col-md-6 coverSection align-center">
+            <img alt="movie-title" [style.max-height]="'540px'" class="carousel-img"
+            src="https://image.tmdb.org/t/p/w500{{this.movieData.poster_path}}">
+    </div>
+</div>
+
+<div class="col-xs-12" *ngIf="!this.movie" [style.padding]="'2em;'">
+        <mat-spinner [diameter]="24" style="margin:0 auto;" color="accent"></mat-spinner>
+</div>
+
+</div>
+<app-footer *ngIf="this.movie"></app-footer>

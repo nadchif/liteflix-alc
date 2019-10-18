@@ -1,0 +1,92 @@
+<div class="contentView">
+    <div class="homeCarouselWrapper">
+        <div id="myCarousel" class="carousel" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li *ngFor="let movie of this.selection ; let i = index" data-target="#myCarousel" class="{{i == 0? 'active' : ''}}"></li>
+            </ol>
+
+            <div class="carousel-inner">
+
+
+
+                <div *ngFor="let movie of this.selection  ; let i = index" class="item {{i == 0 ? 'active' : ''}}">
+                    <img *ngIf="movie.poster_path" alt="movie-title" class="carousel-img"
+                        src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}">
+                    <img *ngIf="!movie.poster_path" alt="movie-title" class="carousel-img"
+                        src="https://placehold.it/500x740">
+                    <div class="carousel-caption">
+                        <h3 class="align-left">{{movie.title}} ({{extractYear(movie.release_date)}})</h3>
+                        <p class="align-left">{{movie.overview}}
+                            <br><br>
+                            <button mat-raised-button type="button" color="primary" (click)="this.moviesService.watchTrailer(movie)"> <span
+                                    class="glyphicon glyphicon-play" aria-hidden="true"></span> Trailer </button>&nbsp;
+                            <button mat-raised-button color="accent"  [routerLink]="['/movie/'+movie.id]">Details...</button>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <section class="movieGroup">
+        <h2 class="sectionTitle">
+            <span class="glyphicon glyphicon-fire" aria-hidden="true"></span> Top Rated</h2>
+
+        <div>
+            <cdk-virtual-scroll-viewport orientation="horizontal" 
+                itemSize="200"  minBufferPx="50" maxBufferPx="150" class="moviesStrip">
+                <div class="cover align-right" *cdkVirtualFor="let movie of movies | async ; templateCacheSize: 0" 
+                     [style.display]="'inline-block'" [style.padding]="'10px'">
+
+                     <!--using router link within cdk-virtual-scroll breaks navigation for some reason-->
+                     <a href="{{'/movie/'+movie.id}}" >
+                    <div class="image">
+                        <img *ngIf="movie.poster_path" [style.height]="'200px'"
+                            src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}"  >
+                        <img *ngIf="!movie.poster_path" [style.height]="'180px'"   src="https://placehold.it/500x740">
+                    </div>
+                    </a>
+                    <span class="dim-text">{{movie.release_date | date}}</span>
+                    
+                    <button mat-icon-button (click)="toggleFavorite(movie)"><span class="glyphicon {{this.favorites.includes(movie.id)? 'glyphicon-heart' : 'glyphicon-heart-empty'}}" aria-hidden="true" [style.color]="'red'"></span></button>
+                </div>
+            </cdk-virtual-scroll-viewport>
+        </div>
+
+
+    </section>
+    <section class="movieGroup">
+        <h2 class="sectionTitle">
+            <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+            Your Favorites</h2>
+        <div class="movieGroupContent">
+          
+                <cdk-virtual-scroll-viewport orientation="horizontal" 
+                itemSize="200"  minBufferPx="50" maxBufferPx="150" class="moviesStrip">
+                <div class="cover align-left" *cdkVirtualFor="let movie of this.favoritesMovieInfo; templateCacheSize: 0" 
+                     [style.display]="'inline-block'" [style.padding]="'10px'">
+                     <!--using router link within cdk-virtual-scroll breaks navigation for some reason-->
+                     <a href="{{'/movie/'+movie.id}}">
+                    <div class="image">
+                        <img *ngIf="movie.poster_path" [style.height]="'200px'"
+                            src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}"  >
+                        <img *ngIf="!movie.poster_path" [style.height]="'180px'"   src="https://placehold.it/500x740">
+                    </div></a>
+                    <button mat-button type="button" color="accent" (click)="this.moviesService.watchTrailer(movie)">
+                            &nbsp;<small><span
+                        class="glyphicon glyphicon-play" aria-hidden="true"></span> </small>&nbsp;Trailer &nbsp;&nbsp;</button>
+                    <button [style.float]="'right'" mat-icon-button color="warn" (click)="toggleFavorite(movie)"> <span
+                        class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                </div>
+            </cdk-virtual-scroll-viewport>
+
+                <div class="cover" *ngIf="favorites.length < 1">
+                    No favorites yet! :-)
+                </div>
+        
+        </div>
+    </section>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,41 @@
+<div class="content">
+
+    <div class="row">
+        <div class="col-md-12">
+            <h2 *ngIf="this.activeMode != 'find'">{{this.activeMode | titlecase}}</h2>
+             <h2>
+            <mat-form-field  *ngIf="this.activeMode == 'find'"  [style.width]="'90%'" appearance="outline">
+                  
+                    <input matInput [(ngModel)]="this.searchQuery" *ngIf="this.activeMode == 'find'"  [style.color]="'#fff'">
+                    <button mat-flat-button color="accent" (click)="navToSearch()" matSuffix><span class="glyphicon glyphicon-search"
+                            aria-hidden="true"></span> Search </button>
+                </mat-form-field>
+            </h2>
+    </div>
+
+<div class="col-xs-12" *ngIf="!this.dataLoaded" [style.padding]="'2em;'">
+        <mat-spinner [diameter]="24" style="margin:0 auto;" color="accent"></mat-spinner>
+</div>
+
+<div class="col-xs-12 gridview" *ngIf="this.dataLoaded" >
+        <div  class="col-sm-6 col-md-3" *ngFor="let movie of displayMovies " 
+        [style.display]="'inline-block'" [style.padding]="'10px'">
+
+        <!--using router link within cdk-virtual-scroll breaks navigation for some reason-->
+        <a href="{{'/movie/'+movie.id}}" >
+       <div class="card align-center">
+           <img *ngIf="movie.poster_path" [style.width]="'80%'" 
+               src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}"  >
+                 </div>
+       </a>
+       <div class="align-center" [style.white-space]="'nowrap'">
+            <span class="dim-text">{{movie.title | titlecase}} ({{movie.release_date.split('-')[0]}})</span>
+       
+            <button mat-icon-button (click)="toggleFavorite(movie)"><span class="glyphicon {{this.favorites.includes(movie.id)? 'glyphicon-heart' : 'glyphicon-heart-empty'}}" aria-hidden="true" [style.color]="'red'"></span></button>
+       
+       </div>
+   </div>
+</div>
+
+</div>
+<app-footer  *ngIf="this.dataLoaded"></app-footer>
