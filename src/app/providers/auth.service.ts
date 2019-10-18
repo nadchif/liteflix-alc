@@ -36,8 +36,7 @@ export class AuthService {
       if (auth) {
         this.user = auth; // save data firebase on user
 
-        console.log('Authenticated');
-        this.userservice.setUserLoggedIn(this.user); // set user data from firebase on local storage
+        console.log('Authenticated'); // set user data from firebase on local storage
       } else {
         console.log('Not authenticated');
       }
@@ -54,6 +53,8 @@ export class AuthService {
       .signInWithPopup(provider)
       .then(data => {
         this.updateUserData(data.user);
+
+        this.userservice.setUserLoggedIn(data.user);
       })
       .catch(error => {
         console.log(error);

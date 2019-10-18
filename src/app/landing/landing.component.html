@@ -22,43 +22,42 @@
                     </h3>
                     <hr>
                     <button mat-raised-button color="accent" (click)="loginWithGoogle()" [style.font-size]="'1.5em'">
-                        Watch Now!  <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                        Watch Now! <i class="fa fa-arrow-right" aria-hidden="true"></i>
                     </button>
-<br><br>
+                    <br><br>
                 </div>
                 <div class="col-md-offset-2 col-md-4">
                     <div class="screenWrapper">
-                                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                                      <ol class="carousel-indicators">
-                                        <li *ngFor="let movie of this.selection" data-target="#myCarousel"></li>
-                                      </ol>
-                                  
-                                      <div class="carousel-inner">
-                                  
-                                        <div *ngFor="let movie of this.selection; let i = index" class="item {{i == 0? 'active' : ''}}">
-                                          <img src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}"  alt="{{movie.title}}" style="width:100%;">
-                                          <div class="carousel-caption">
-                                            <h3>{{movie.title}}</h3>
-                                            <p>{{movie.release_date | date}}</p>
-                                          </div>
-                                        </div>
-                                  
-                                       
-                                      
-                                        
-                                      </div>
-                                  
-                                  
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+                            <div class="carousel-inner">
+
+                                <div *ngFor="let movie of this.selection; let i = index"
+                                    class="item {{i == 0? 'active' : ''}}">
+                                    <img src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}"
+                                        alt="{{movie.title}}" style="width:100%;">
+                                    <div class="carousel-caption">
+                                        <h3>{{movie.title}}</h3>
+                                        <p>{{movie.release_date | date}}</p>
                                     </div>
-                    
+                                </div>
+
+
+
+
+                            </div>
+
+
+                        </div>
+
                     </div>
                 </div>
 
             </div>
         </div>
         <div class="breaker"></div>
-<hr>
-    <footer>
+        <hr>
+        <footer>
             <h4>More Information</h4>
             <div class="row">
                 <div class="col-sm-4">
