@@ -69,7 +69,7 @@ export class BrowseMoviesComponent implements OnInit {
   }
   getMovies(query = null) {
 
-    if (this.activeMode.toLowerCase() == 'recommended' || this.activeMode.toLowerCase() == 'favorites') {
+    if (this.activeMode.toLowerCase() == 'all' || this.activeMode.toLowerCase() == 'recommended' || this.activeMode.toLowerCase() == 'favorites') {
       this.movies = this.moviesService.getMovies();
     }
 
@@ -89,8 +89,11 @@ export class BrowseMoviesComponent implements OnInit {
       data => {
         this.cachedMoviesInfo = data;
         this.getFavorites();
-        if (this.activeMode.toLowerCase() == 'recommended' || this.activeMode.toLowerCase() == 'all') {
+        if (this.activeMode.toLowerCase() == 'recommended') {
           this.displayMovies = this.cachedMoviesInfo;
+        }
+        if (this.activeMode.toLowerCase() == 'all') {
+          this.displayMovies = Object.values(this.moviesService.getCacheMovieData()) as Movie[];
         }
         if (this.activeMode == 'find') {
           this.displayMovies = data['results'];
@@ -103,11 +106,12 @@ export class BrowseMoviesComponent implements OnInit {
     );
 
   }
-navToSearch() {
+  navToSearch() {
 
-  this.router.navigateByUrl(`/find/${this.searchQuery}`);
+    this.dataLoaded = false;
+    this.router.navigateByUrl(`/find/${this.searchQuery}`);
 
-}
+  }
   refreshFavoritesInfo() {
     if (this.activeMode.toLowerCase() == 'favorites') {
       this.displayMovies = this.cachedMoviesInfo.filter((movie) => {
@@ -117,48 +121,15 @@ navToSearch() {
 
   }
 
-  dynamicSort(property) {
-    let sortOrder = 1;
-    if (property[0] === '-') {
-      sortOrder = -1;
-      property = property.substr(1);
-    }
-    return (a, b) => {
-      const result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
-      return result * sortOrder;
-    };
-  }
-
   loadMovieDetails(movieid) {
     this.router.navigateByUrl('/movie/' + movieid);
   }
 
-  sortMovies(property: string) {
-    if (property == 'title') {
-      if (this.sort == 1) {
-        this.movies = this.movies.pipe(map(items => items.sort(this.dynamicSort('-title'))));
-        this.sort = -1;
-      } else {
-        this.movies = this.movies.pipe(map(items => items.sort(this.dynamicSort('title'))));
-        this.sort = 1;
-      }
-    } else if (property == 'popularity') {
-      if (this.sort == 2) {
-        this.movies = this.movies.pipe(map(items => items.sort(this.dynamicSort('-popularity'))));
-        this.sort = -2;
-      } else {
-        this.movies = this.movies.pipe(map(items => items.sort(this.dynamicSort('popularity'))));
-        this.sort = 2;
-      }
-    }
-  }
   toggleFavorite(movie: Movie) {
     this.favorites = this.user.toggleUserFavorite(movie.id);
     this.refreshFavoritesInfo();
   }
-  onSelect(movie: Movie) {
-    this.router.navigate(['./../movie', movie.id]);
-  }
+
   extractYear(releaseDate: string) {
     return releaseDate.split('-')[0];
   }

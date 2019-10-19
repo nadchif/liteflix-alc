@@ -32,7 +32,7 @@ export class MovieDetailsComponent implements OnInit {
   getDetails(id) {
     this.moviesService.getDetails(id).subscribe(
       data => {
-        console.log(data);
+        //console.log(data);
         this.movieData = data;
         this.movie = true;
       },

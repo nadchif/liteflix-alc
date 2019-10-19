@@ -35,7 +35,6 @@ export class AuthService {
     this.afAuth.authState.subscribe(auth => {
       if (auth) {
         this.user = auth; // save data firebase on user
-
         console.log('Authenticated'); // set user data from firebase on local storage
       } else {
         console.log('Not authenticated');
@@ -53,27 +52,12 @@ export class AuthService {
       .signInWithPopup(provider)
       .then(data => {
         this.updateUserData(data.user);
-
         this.userservice.setUserLoggedIn(data.user);
       })
       .catch(error => {
         console.log(error);
       });
-    // setCustomParameters host domain (hd)
-    /*
-        let provider = new firebase.auth.GoogleAuthProvider();
-        provider.addScope('email');
-        provider.setCustomParameters({
-          'hd':'domain.edu.mx'
-        });
-        this.afAuth.auth.signInWithPopup(provider)
-        .then((data)=>{
-          this.router.navigate(['/dashboard']);
-        })
-        .catch((error)=>{
-          console.log(error)
-        });
-      */
+
   }
   /*
    * logout
@@ -96,8 +80,6 @@ export class AuthService {
       displayName: user.displayName,
       photoURL: user.photoURL
     };
-
-    // console.log("updated user data ", data);
 
     this.ngZone.run(() => this.router.navigate(['dashboard'])).then();
 

@@ -11,9 +11,7 @@ body, .contentView{
 .contentView {
   min-height: 100vh;
   background: #222;
-
-
-
+  
   .carousel-img{
     width:100%;
     height:70vh !important;
@@ -38,6 +36,20 @@ body, .contentView{
 
 }
 
+
+a {
+  color: #aaa;
+
+  & :hover {
+    color: #ddd;
+
+    & :visited {
+      color: #aaa;
+    }
+
+  }
+
+}
 
 .sectionTitle{
   margin: 0px;
@@ -139,67 +151,9 @@ body, .contentView{
 .py-4 {
   margin-top: 4em;
 }
-
-
-/* landing page components */
-.landingPage {
-
-  padding: 1em;
-  min-height: 100vh;
-  min-width: 100%;
-  background: #111;
-  color: #fff;
-
-  .logo{
-    height: 2.5em;
-  }
-
-  .flexparent {
-    min-height: 80vh;
-    display: flex;
-    align-items: flex-end;
-    flex-direction: row;
-  }
-
-  hr {
-    border-top: 1px solid #444;
-  }
-
-  .breaker {
-    padding-top: 10em;
-  }
-  .screenWrapper{
-      background-image: url('assets/img/tv.png');
-     
-  background-repeat: no-repeat;
-  background-size: contain;
-  display:inline-block;
-    
-      padding-top:5%;
-      padding-right:5%;
-      padding-left:5%;
-      padding-bottom: 20%;
-
-      .carousel{
-          height:170px;
-          width:320px;
-         
-          img {
-              max-height:170px;
-              object-fit: cover;
-          }
-      }
-  }
-}
-
-
-
-
 .mat-form-field-appearance-outline .mat-form-field-flex {
   background: #000 !important;
 }
-
-
 
 /* mat-icon-stepper selected color change */
 .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {

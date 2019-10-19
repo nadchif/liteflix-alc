@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
 
 navToSearch() {
 
-  this.router.navigateByUrl(`/find/${this.searchQuery}`);
+  this.router.navigateByUrl(`/find/${encodeURI(this.searchQuery)}`);
 
 }
   getUserLoggedIn() {
