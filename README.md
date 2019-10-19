@@ -1,11 +1,11 @@
-#LiteFLIX
+# LiteFLIX
 A Google Africa Developer Scholarship Phase II Mobile Web Specialist Challenge.
 
 
-####Demo Site
+#### Demo Site
 https://liteflix-alc.netlify.com
 
-####Screenshots
+#### Screenshots
 
 
 --
