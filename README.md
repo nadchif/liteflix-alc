@@ -15,7 +15,7 @@ https://liteflix-alc.netlify.com
   <summary>Click to expand!</summary>
   
     
-#####Google Africa Developer Scholarship Phase II 
+##### Google Africa Developer Scholarship Phase II 
 
 
 Mobile Web Specialist Challenge I
