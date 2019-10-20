@@ -7,10 +7,10 @@ https://liteflix-alc.netlify.com
 
 #### Screenshots
 ![PC screen 1](https://github.com/nadchif/liteflix-alc/raw/master/src/screenshots/pc-sc2.jpg)
-![PC screen 2](https://github.com/nadchif/liteflix-alc/raw/master/src/screenshots/pc_sc1.jpg)
+![PC screen 2](https://github.com/nadchif/liteflix-alc/raw/master/src/screenshots/pc-sc1.jpg)
 
-![Mobile screen 2](https://github.com/nadchif/liteflix-alc/raw/master/src/screenshots/mobile_sc1.jpg)
-![Mobile screen 1](https://github.com/nadchif/liteflix-alc/raw/master/src/screenshots/mobile_sc2.jpg)
+![Mobile screen 2](https://github.com/nadchif/liteflix-alc/raw/master/src/screenshots/mobile-sc1.jpg)
+![Mobile screen 1](https://github.com/nadchif/liteflix-alc/raw/master/src/screenshots/mobile-sc2.jpg)
 
 
 
