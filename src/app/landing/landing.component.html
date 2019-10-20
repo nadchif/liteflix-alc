@@ -1,7 +1,6 @@
-
 <div class="loadingOverLay" *ngIf="this.loadingIndicator.isLoading">
-        <mat-spinner [diameter]="32" style="margin:5em auto;" color="accent"></mat-spinner>
-    </div>
+    <mat-spinner [diameter]="32" style="margin:5em auto;" color="accent"></mat-spinner>
+</div>
 <div class="landingPage">
     <div class="container">
         <div class="row">
@@ -30,19 +29,31 @@
                 </div>
                 <div class="col-md-offset-2 col-md-4">
                     <div class="screenWrapper">
-                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                            <div class="carousel-inner">
-                                <div *ngFor="let movie of this.selection; let i = index"
-                                    class="item {{i == 0? 'active' : ''}}">
-                                    <img src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}"
-                                        alt="{{movie.title}}" style="width:100%;">
-                                    <div class="carousel-caption">
-                                        <h3>{{movie.title}}</h3>
-                                        <p>{{movie.release_date | date}}</p>
+                        <div class="tvParent">
+                            <img src="../../assets/img/tv.png">
+                            <div class="slideWrapper" >
+                                <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width:100%;">
+                                    <div class="carousel-inner">
+                                        
+
+                                        <div class="item {{i == 0? 'active' : ''}}"  *ngFor="let movie of this.selection; let i = index" style="width:100%;">
+                                            <img class="clipCov"
+                                                src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}"
+                                                alt="{{movie.title}}">
+                                                <div class="carousel-caption centerAnchor">
+                                                        <h3>{{movie.title}}</h3>
+                                                        <p>{{movie.release_date | date}}</p>
+                                                    </div>
+                                        </div>
+
+                                       
                                     </div>
                                 </div>
+
+
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>

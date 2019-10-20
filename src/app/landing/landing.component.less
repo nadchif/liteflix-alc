@@ -28,22 +28,44 @@
       padding-top: 10em;
     }
     .screenWrapper{
-    background-image: url('../../assets/img/tv.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    display:inline-block;
+
+        .tvParent{
+          background-image: url('../../assets/img/tv.png');
+          background-repeat: no-repeat;
+          background-size: contain;
+          position: relative;
+         
+          overflow: hidden;
+          img {
+            width: 100%;
+          }
+          
+        }
+        .slideWrapper{
+          position: absolute;
+          top: -50%;
+        }
+        .clipCov{
+          padding:5% 5% 15% 5%;
+          clip-path: polygon(0 25%, 100% 25%, 100% 55%, 0 55%);
+        }
+        .centerAnchor{
+          
+          position: absolute;
+          display: block;
+          text-align:center;
+          top:25%;
+        }
       
-        padding-top:5%;
-        padding-right:5%;
-        padding-left:5%;
-        padding-bottom: 20%;
+      
   
         .carousel{
-            height:170px;
-            width:320px;
+
+            width:80%;
+            overflow-y:hidden;
            
             img {
-                max-height:170px;
+                width:100%;
                 object-fit: cover;
             }
         }
