@@ -43,9 +43,9 @@
                         </div>
                         <span class="dim-text">{{movie.release_date | date}}</span>
                     </a>
-                    <button mat-icon-button (click)="toggleFavorite(movie)"><span
+                    <button mat-icon-button color="warn" (click)="toggleFavorite(movie)"><span [style.font-size]="'16pt'"
                             class="glyphicon {{this.favorites.includes(movie.id)? 'glyphicon-heart' : 'glyphicon-heart-empty'}}"
-                            aria-hidden="true" [style.color]="'red'"></span></button>
+                            aria-hidden="true"></span></button>
                 </div>
             </cdk-virtual-scroll-viewport>
         </div>

@@ -32,7 +32,7 @@
                         <a href="{{'/movie/'+movie.id}}">
                     {{movie.title | titlecase}} ({{movie.release_date.split('-')[0]}})
                     </a>
-                    <button mat-icon-button (click)="toggleFavorite(movie)" color="warn"><span
+                    <button mat-icon-button (click)="toggleFavorite(movie)" color="warn"><span  [style.font-size]="'16pt'"
                             class="glyphicon {{this.favorites.includes(movie.id)? 'glyphicon-heart' : 'glyphicon-heart-empty'}}"
                             aria-hidden="true"></span></button>
                 </div>
