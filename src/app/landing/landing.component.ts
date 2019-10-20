@@ -1,3 +1,4 @@
+import { LoadingIndicatorService } from './../providers/loadingIndicatorStatus';
 import { MoviedbService } from './../providers/moviedb.service';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../providers/auth.service';
@@ -26,7 +27,8 @@ export class LandingComponent implements OnInit {
 
   }
 
-  constructor(private authservice: AuthService, private router: Router, private moviesService: MoviedbService) { }
+  constructor(private authservice: AuthService, private router: Router, 
+    private moviesService: MoviedbService, public loadingIndicator: LoadingIndicatorService) { }
   ngOnInit() {
 
     if ((localStorage.getItem('user'))) {

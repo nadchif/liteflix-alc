@@ -1,3 +1,4 @@
+import { LoadingIndicatorService } from './providers/loadingIndicatorStatus';
 import { MoviedbService } from './providers/moviedb.service';
 import { NeedAuthGuard } from './providers/auth.guard';
 import { AuthService } from './providers/auth.service';
@@ -58,7 +59,7 @@ import { BrowseMoviesComponent } from './pages/browse-movies/browse-movies.compo
     MatProgressSpinnerModule,
     ScrollDispatchModule,
     ScrollingModule,
-    MatBadgeModule, 
+    MatBadgeModule,
     MatChipsModule,
     FormsModule,
     MatSidenavModule
@@ -68,6 +69,7 @@ import { BrowseMoviesComponent } from './pages/browse-movies/browse-movies.compo
     AuthService,
     NeedAuthGuard,
     MoviedbService,
+    LoadingIndicatorService
   ],
   bootstrap: [AppComponent]
 })
