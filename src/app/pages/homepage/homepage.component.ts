@@ -1,9 +1,10 @@
 import { UserService } from './../../providers/user.service';
 import { MoviedbService } from '../../providers/moviedb.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Movie } from '../../interfaces/movie';
 import { Observable } from 'rxjs';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'app-homepage',
@@ -11,6 +12,11 @@ import { Observable } from 'rxjs';
   styleUrls: ['./homepage.component.less']
 })
 export class HomepageComponent implements OnInit {
+  @ViewChild(CdkVirtualScrollViewport, { static: false })
+  viewport: CdkVirtualScrollViewport;
+  @ViewChild('userFavorites', { static: false })
+  viewport2: CdkVirtualScrollViewport;
+
   movies: Observable<Movie[]>;
   favorites = [];
   favoritesMovieInfo: Movie[] = [];
@@ -18,6 +24,9 @@ export class HomepageComponent implements OnInit {
   cachedMoviesInfo = this.moviesService.getCacheMovieData();
   language: string;
   sort: number;
+  currentScrollPos = 0;
+  currentFavsScrollPos = 0;
+
 
   constructor(
     public moviesService: MoviedbService,
@@ -30,6 +39,31 @@ export class HomepageComponent implements OnInit {
     this.getMovies();
     this.getFavorites();
   }
+
+  scrollCarousel(amt) {
+
+    if ((this.currentScrollPos) > this.viewport.getDataLength()) {
+      return;
+    }
+    if (this.currentScrollPos < 0 ) {
+      this.currentScrollPos = 0;
+    }
+    this.currentScrollPos += amt;
+    this.viewport.scrollToIndex(this.currentScrollPos);
+  }
+  scrollFavsCarousel(amt) {
+
+    if ((this.currentFavsScrollPos) > this.viewport.getDataLength()) {
+      return;
+    }
+    if (this.currentFavsScrollPos < 0 ) {
+      this.currentFavsScrollPos = 0;
+    }
+    this.currentFavsScrollPos += amt;
+    
+    this.viewport2.scrollToIndex(this.currentFavsScrollPos);
+  }
+
   getFavorites() {
     this.favorites = this.user.getUserFavorites();
   }

@@ -3,11 +3,11 @@
         src="https://image.tmdb.org/t/p/w500{{this.movieData.poster_path}}">
 
     <div class="col-xs-12">
-        <button mat-button routerLink="/" color="warn">
+        <a  routerLink="/home" color="warn">
             <small>
                     <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
             </small>
-             Go Home</button>
+             Go Home</a>
     </div>
     <div *ngIf="this.movie">
     <div class="col-md-6 descriptionSection">
