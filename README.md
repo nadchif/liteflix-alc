@@ -6,12 +6,22 @@ A Google Africa Developer Scholarship Phase II Mobile Web Specialist Challenge.
 https://liteflix-alc.netlify.com
 
 #### Screenshots
+
 ![PC screen 1](https://github.com/nadchif/liteflix-alc/raw/master/src/screenshots/pc-sc2.jpg)
-![PC screen 2](https://github.com/nadchif/liteflix-alc/raw/master/src/screenshots/pc_sc1.jpg)
+<details>
+  <summary>
+    Click for more screenshots
+  </summary>
+  
+  PC Screenshot:
+  
+![PC screen 2](https://github.com/nadchif/liteflix-alc/raw/master/src/screenshots/pc-sc1.jpg)
 
-![Mobile screen 2](https://github.com/nadchif/liteflix-alc/raw/master/src/screenshots/mobile_sc1.jpg)
-![Mobile screen 1](https://github.com/nadchif/liteflix-alc/raw/master/src/screenshots/mobile_sc2.jpg)
-
+  Mobile Screenshot:
+  
+![Mobile screen 2](https://github.com/nadchif/liteflix-alc/raw/master/src/screenshots/mobile-sc1.jpg)
+![Mobile screen 1](https://github.com/nadchif/liteflix-alc/raw/master/src/screenshots/mobile-sc2.jpg)
+</details>
 
 
 --
