@@ -27,12 +27,12 @@ export class LandingComponent implements OnInit {
 
   }
 
-  constructor(private authservice: AuthService, private router: Router, 
-    private moviesService: MoviedbService, public loadingIndicator: LoadingIndicatorService) { }
+  constructor(private authservice: AuthService, private router: Router,
+              private moviesService: MoviedbService, public loadingIndicator: LoadingIndicatorService) { }
   ngOnInit() {
 
     if ((localStorage.getItem('user'))) {
-      this.router.navigate(['/home']);
+      this.router.navigate(['']);
       return;
     }
     this.getMovies();

@@ -39,7 +39,7 @@ export class AuthService {
       if (auth) {
         this.user = auth; // save data firebase on user
         console.log('Authenticated'); // set user data from firebase on local storage
-        this.loadingIndicator.isLoading = false;
+        this.loadingIndicator.isLoading = true;
       } else {
         console.log('Not authenticated');
         this.loadingIndicator.isLoading = false;
@@ -52,15 +52,17 @@ export class AuthService {
    * login with google
    */
   loginWithGoogle() {
+
+    this.loadingIndicator.isLoading = true;
     const provider = new firebase.auth.GoogleAuthProvider();
     this.afAuth.auth
       .signInWithPopup(provider)
       .then(data => {
-        this.loadingIndicator.isLoading = true;
         this.updateUserData(data.user);
       })
       .catch(error => {
         console.log(error);
+        this.loadingIndicator.isLoading = false;
       });
   }
   /*

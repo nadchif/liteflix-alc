@@ -12,7 +12,6 @@ const routes: Routes = [{
   path: '',
   component: DashboardComponent,
   canActivate: [NeedAuthGuard],
-
   children: [
     {
       path: '',
@@ -29,8 +28,6 @@ const routes: Routes = [{
       component: BrowseMoviesComponent,
       canActivate: [NeedAuthGuard]
     },
-
-    
     {
       path: 'find/:query',
       component: BrowseMoviesComponent,
@@ -42,14 +39,7 @@ const routes: Routes = [{
   path: 'landing',
   component: LandingComponent
 },
-
-{
-  path: 'movie/:movieid',
-  component: DashboardComponent,
-  canActivate: [NeedAuthGuard]
-},
-
-{ path: '**', redirectTo: '/' }
+{ path: '**', redirectTo: '' }
 ];
 
 @NgModule({
