@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, forkJoin } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Movie } from '../interfaces/movie';
 import { map, catchError } from 'rxjs/operators';
@@ -43,10 +43,12 @@ export class MoviedbService {
   getBatchDetails(movieIDs: any[]) {
     // AN EXPENSIVE FUNCTION, use sparingly. unfortunately TMDB does not offer a way to string multiple ids;
     let movieCache = {};
+    const movieFetchTasks = [];
     movieIDs.forEach((id, index) => {
       if (index > 25) {
         return; // limit to 25 requests (optional);
       }
+
       this.getDetails(id).subscribe(data => {
         if (!localStorage.getItem('movies')) {
           console.log('no movies cached yet');
@@ -60,9 +62,8 @@ export class MoviedbService {
         }
 
       });
+
     });
-
-
   }
   getDetails(id: number) {
     const detailsUrl = `${this.url}${id}?api_key=${this.apiKey}&language=${this.language}`;
@@ -133,7 +134,7 @@ export class MoviedbService {
 
   // navigate to youtube for movie trailer
   public watchTrailer(movie: Movie) {
-    const searchPhrase = `${movie.title} ${movie.release_date.split('-')[0]} Official Trailer`;
+    const searchPhrase = encodeURI(`${movie.title} ${movie.release_date.split('-')[0]} Official Trailer`);
     window.location.href = 'https://www.youtube.com/results?search_query=' + searchPhrase;
   }
 

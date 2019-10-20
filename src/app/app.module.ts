@@ -9,7 +9,6 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { NavbarComponent } from './layout/navbar/navbar.component';
 import { LandingComponent } from './landing/landing.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
 import { AngularFireModule } from '@angular/fire';
@@ -34,7 +33,6 @@ import { BrowseMoviesComponent } from './pages/browse-movies/browse-movies.compo
   declarations: [
     AppComponent,
     DashboardComponent,
-    NavbarComponent,
     LandingComponent,
     HomepageComponent,
     MovieDetailsComponent,
@@ -62,13 +60,14 @@ import { BrowseMoviesComponent } from './pages/browse-movies/browse-movies.compo
     ScrollingModule,
     MatBadgeModule, 
     MatChipsModule,
-    FormsModule
+    FormsModule,
+    MatSidenavModule
   ],
   providers: [
     UserService,
     AuthService,
     NeedAuthGuard,
-    MoviedbService
+    MoviedbService,
   ],
   bootstrap: [AppComponent]
 })

@@ -5,7 +5,7 @@
             <h3>
                 <mat-form-field *ngIf="this.activeMode == 'find'" [style.width]="'90%'" [style.margin]="'0px 5% 0px 5%'"
                     appearance="outline">
-                    <input matInput [(ngModel)]="this.searchQuery" *ngIf="this.activeMode == 'find'"
+                    <input matInput [(ngModel)]="this.searchQuery"  (keydown.enter)="navToSearch()"  *ngIf="this.activeMode == 'find'"
                         [style.color]="'#fff'">
                     <button mat-flat-button color="accent" (click)="navToSearch()" matSuffix><span
                             class="glyphicon glyphicon-search" aria-hidden="true"></span> <span

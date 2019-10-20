@@ -35,7 +35,6 @@ export class LandingComponent implements OnInit {
     }
     this.getMovies();
 
-
   }
 
 

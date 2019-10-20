@@ -69,7 +69,8 @@ export class BrowseMoviesComponent implements OnInit {
   }
   getMovies(query = null) {
 
-    if (this.activeMode.toLowerCase() == 'all' || this.activeMode.toLowerCase() == 'recommended' || this.activeMode.toLowerCase() == 'favorites') {
+    if (this.activeMode.toLowerCase() == 'all' ||
+      this.activeMode.toLowerCase() == 'recommended' || this.activeMode.toLowerCase() == 'favorites') {
       this.movies = this.moviesService.getMovies();
     }
 
@@ -114,7 +115,8 @@ export class BrowseMoviesComponent implements OnInit {
   }
   refreshFavoritesInfo() {
     if (this.activeMode.toLowerCase() == 'favorites') {
-      this.displayMovies = this.cachedMoviesInfo.filter((movie) => {
+      const cachedData = Object.values(this.moviesService.getCacheMovieData()) as Movie[];
+      this.displayMovies = cachedData.filter((movie) => {
         return this.favorites.includes(movie.id);
       });
     }

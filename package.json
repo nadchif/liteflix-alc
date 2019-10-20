@@ -24,7 +24,6 @@
     "@angular/router": "~8.1.1",
     "bootstrap": "^3.4.1",
     "firebase": "^7.2.1",
-    "fontawesome": "^4.7.2",
     "jquery": "^3.4.1",
     "popper.js": "^1.15.0",
     "rxjs": "~6.4.0",

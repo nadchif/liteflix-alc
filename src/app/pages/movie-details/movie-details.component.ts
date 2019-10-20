@@ -48,8 +48,8 @@ export class MovieDetailsComponent implements OnInit {
     this.favorites = this.user.toggleUserFavorite(movie.id);
   }
 
-  getFavorites() {
-    this.favorites = this.user.getUserFavorites();
+  async getFavorites() {
+    this.favorites = await this.user.getUserFavorites();
   }
   navBack() {
     window.history.back();

@@ -10,8 +10,8 @@
             <div class="col-xs-6 align-right">
                 <mat-form-field class="hidden-xs">
                     <mat-label>Search...</mat-label>
-                    <input matInput  [(ngModel)]="this.searchQuery" >
-                    <button mat-button color="accent" (click)="navToSearch()"matSuffix><span class="glyphicon glyphicon-search"
+                    <input matInput  [(ngModel)]="this.searchQuery"  (keydown.enter)="navToSearch()" >
+                    <button mat-button color="accent" (click)="navToSearch()" matSuffix><span class="glyphicon glyphicon-search"
                             aria-hidden="true"></span></button>
                 </mat-form-field>
                 <button mat-button  [matMenuTriggerFor]="menu">
@@ -32,7 +32,13 @@
 </mat-toolbar>
 <mat-sidenav-container class="example-container" [style.min-height]="'100vh'">
     <mat-sidenav #drawer mode="side"  role="navigation">
-        <app-navbar></app-navbar>
+        <mat-nav-list>
+            <a mat-list-item routerLink='/home' (click)="this.drawer.close()"> <span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;Home</a>
+            <a mat-list-item routerLink='/browse/all' (click)="this.drawer.close()"> <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp;Browse</a>
+            <a mat-list-item routerLink='/browse/recommended' (click)="this.drawer.close()"> <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp;Recommended</a>
+            <a mat-list-item routerLink='/browse/favorites' (click)="this.drawer.close()">  <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>&nbsp;<span  matBadge="{{this.userProfile.getUserFavorites().length}}">Favorites &nbsp;&nbsp;</span></a>
+            <a mat-list-item routerLink='/find/newsearch' (click)="this.drawer.close()">  <span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp; Search</a>
+        </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content [style.min-height]="'100%'" [style.overflow-x]="'hidden'">
         <router-outlet></router-outlet>
