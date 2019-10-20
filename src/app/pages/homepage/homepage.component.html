@@ -30,7 +30,7 @@
             <span class="glyphicon glyphicon-fire" aria-hidden="true"></span> Top Rated</h2>
         <div>
             <div class="flex-parent">
-                <div class="scroll-indicator ">
+                <div class="scroll-indicator leftPadding">
                     <h3 class="slide-out-blurred-left" (click)="scrollCarousel(-1)"><span
                             class="glyphicon glyphicon glyphicon-chevron-left" aria-hidden="true"></span></h3>
                 </div>
@@ -55,7 +55,7 @@
                                 aria-hidden="true"></span></button>
                     </div>
                 </cdk-virtual-scroll-viewport>
-                <div class="scroll-indicator">
+                <div class="scroll-indicator rightPadding">
                     <h3 class="slide-out-blurred-right" (click)="scrollCarousel(1)"><span
                             class="glyphicon glyphicon glyphicon-chevron-right" aria-hidden="true"></span></h3>
                 </div>
@@ -75,7 +75,7 @@
 
             <div class="flex-parent" *ngIf="favorites.length > 0">
                         
-                <div class="scroll-indicator ">
+                <div class="scroll-indicator leftPadding">
                     <h3 class="slide-out-blurred-left" (click)="scrollFavsCarousel(-1)"><span
                             class="glyphicon glyphicon glyphicon-chevron-left" aria-hidden="true"></span></h3>
                 </div>
@@ -101,7 +101,7 @@
                             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
                     </div>
                 </cdk-virtual-scroll-viewport>
-                <div class="scroll-indicator">
+                <div class="scroll-indicator rightPadding">
                     <h3 class="slide-out-blurred-right" (click)="scrollFavsCarousel(1)"><span
                             class="glyphicon glyphicon glyphicon-chevron-right" aria-hidden="true"></span></h3>
                 </div>
