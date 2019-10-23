@@ -11,50 +11,23 @@ export class AuthService {
   user: User;
   constructor(
     private ngZone: NgZone,
-    public afAuth: AngularFireAuth,
+    private afAuth: AngularFireAuth,
     private router: Router,
-    public userservice: UserService,
+    private userservice: UserService,
     private afs: AngularFirestore,
     private loadingIndicator: LoadingIndicatorService
   ) {
-    this.checkLocalStorage();
-  }
-  /*
-   * If localStoge is empty, we call getDataFromFirebase
-   * method set user data from firebase on localStorage
-   */
-  checkLocalStorage() {
-    if (!localStorage.getItem('user')) {
-      this.getDataFromFirebase();
-    } else {
-      console.log('localStorage ready!');
-    }
-  }
-  /*
-   * Call data from firebase and set data on local storage
-   */
-  getDataFromFirebase() {
-    this.loadingIndicator.isLoading = true;
-    this.afAuth.authState.subscribe(auth => {
-
-      this.loadingIndicator.isLoading = false;
-      if (auth) {
-        this.user = auth; // save data firebase on user
-        console.log('Authenticated'); // set user data from firebase on local storage
-      } else {
-        console.log('Not authenticated');
-      }
-    });
-
 
   }
+
   /*
    * login with google
    */
   loginWithGoogle() {
 
-    this.loadingIndicator.isLoading = true;
     const provider = new firebase.auth.GoogleAuthProvider();
+
+    this.loadingIndicator.isLoading = true;
     this.afAuth.auth
       .signInWithPopup(provider)
       .then(data => {
@@ -65,19 +38,18 @@ export class AuthService {
         this.loadingIndicator.isLoading = false;
       });
   }
-  /*
-   * logout
-   */
+
   logout() {
     this.userservice.clearLocalStorage(); // Optional to clear localStorage
     this.afAuth.auth.signOut().then(() => {
-      this.router.navigate(['login']);
+      window.location.reload();
     });
   }
 
   private updateUserData(user) {
     // Sets user data to firestore on login
 
+    this.loadingIndicator.isLoading = true;
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
 
     const data: User = {
@@ -90,9 +62,7 @@ export class AuthService {
 
     this.userservice.setUserLoggedIn(data);
 
-    this.loadingIndicator.isLoading = false;
-
-    this.ngZone.run(() => this.router.navigate(['dashboard'])).then();
+    this.ngZone.run(() => this.router.navigate([''])).then();
 
     return true;
 
