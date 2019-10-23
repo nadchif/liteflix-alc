@@ -31,8 +31,8 @@ export class LandingComponent implements OnInit {
               private moviesService: MoviedbService, public loadingIndicator: LoadingIndicatorService) { }
   ngOnInit() {
 
-    if ((localStorage.getItem('user'))) {
-      this.router.navigate(['']);
+    if (localStorage.getItem('user')) {
+      this.router.navigateByUrl('/');
       return;
     }
     this.getMovies();
