@@ -36,13 +36,13 @@ export class AuthService {
   getDataFromFirebase() {
     this.loadingIndicator.isLoading = true;
     this.afAuth.authState.subscribe(auth => {
+
+      this.loadingIndicator.isLoading = false;
       if (auth) {
         this.user = auth; // save data firebase on user
         console.log('Authenticated'); // set user data from firebase on local storage
-        this.loadingIndicator.isLoading = true;
       } else {
         console.log('Not authenticated');
-        this.loadingIndicator.isLoading = false;
       }
     });
 
