@@ -95,7 +95,7 @@ export class BrowseMoviesComponent implements OnInit {
              if (endIndex > this.displayMovies.length) {
                  endIndex = this.displayMovies.length;
              }
-        this.displayMovies = this.displayMovies.slice(startIndex, endIndex);
+        this.displayMovies = this.paginatorCollection.slice(startIndex, endIndex);
         this.dataLoaded = true;
         return;
       },
