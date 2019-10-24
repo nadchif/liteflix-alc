@@ -88,12 +88,12 @@ export class BrowseMoviesComponent implements OnInit {
   }
   getAllMovies(page?: number) {
     let idx;
-    if (page > 0) {
+    if (page > 1) {
       idx = page;
     } else {
       idx = 1;
     }
-    
+   
    this.isCaching = true;
     this.moviesService.getAllMovies(idx).subscribe(
       data => {
@@ -108,6 +108,7 @@ export class BrowseMoviesComponent implements OnInit {
              }
         this.displayMovies = this.paginatorCollection.slice(startIndex, endIndex);
         this.isCaching = false;
+        this.dataLoaded = true;
         return;
       },
       error => {

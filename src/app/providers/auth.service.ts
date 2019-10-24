@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { User } from '../interfaces/User';
 import { UserService } from './user.service';
 import { AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
+
 @Injectable()
 export class AuthService {
   user: User;
