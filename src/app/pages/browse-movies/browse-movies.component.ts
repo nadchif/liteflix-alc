@@ -75,6 +75,14 @@ export class BrowseMoviesComponent implements OnInit {
     window.scroll(0, 0);
     if((event.pageIndex + 1) > this.currentPage){
     this.getAllMovies(event.pageIndex + 1);
+    }else{
+      const startIndex = event.pageIndex * this.pageSize;
+             let endIndex = startIndex + this.pageSize;
+             if (endIndex > this.paginatorCollection.length) {
+                 endIndex = this.paginatorCollection.length;
+             }
+      
+        this.displayMovies = this.paginatorCollection.slice(startIndex, endIndex);
     }
   }
   getAllMovies(page?: number) {
@@ -84,13 +92,15 @@ export class BrowseMoviesComponent implements OnInit {
     } else {
       idx = 1;
     }
+    
+   this.dataLoaded = false;
     this.moviesService.getAllMovies(idx).subscribe(
       data => {
         this.currentPage = (idx-1);
         this.pageSize = data.itemsPerPage;
         this.resultsCount = data.resultsCount;
         this.paginatorCollection = this.paginatorCollection.concat(data.results);
-            const startIndex = idx * this.pageSize;
+            const startIndex = (idx-1) * this.pageSize;
              let endIndex = startIndex + this.pageSize;
              if (endIndex > this.paginatorCollection.length) {
                  endIndex = this.paginatorCollection.length;
