@@ -77,8 +77,6 @@ export class BrowseMoviesComponent implements OnInit {
     }
   }
   getAllMovies(page?: number) {
-
-    this.dataLoaded = false;
     let idx;
     if (page > 0) {
       idx = page;
@@ -87,7 +85,7 @@ export class BrowseMoviesComponent implements OnInit {
     }
     this.moviesService.getAllMovies(idx).subscribe(
       data => {
-        this.currentPage = idx;
+        this.currentPage = (idx-1);
         this.resultsCount = data.resultsCount;
         this.displayMovies = this.displayMovies.concat(data.results);
         this.pageSize = data.itemsPerPage;
