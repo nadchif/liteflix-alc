@@ -75,6 +75,8 @@ export class BrowseMoviesComponent implements OnInit {
     this.getAllMovies(event.pageIndex + 1);
   }
   getAllMovies(page?: number) {
+
+    this.dataLoaded = false;
     let idx;
     if (page > 0) {
       idx = page;
