@@ -14,7 +14,7 @@
             </h3>
         </div>
     </div>
-    <div class="row" *ngIf="!this.dataLoaded" [style.padding]="'2em;'">
+    <div class="row" *ngIf="!this.dataLoaded || this.isCaching" [style.padding]="'2em;'">
         <mat-spinner [diameter]="24" style="margin:0 auto;" color="accent"></mat-spinner>
     </div>
 
