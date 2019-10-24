@@ -74,7 +74,7 @@ export class BrowseMoviesComponent implements OnInit {
   }
   OnPageChange(event) {
     window.scroll(0, 0);
-    if((event.pageIndex + 1) > this.currentPage){
+    if((event.pageIndex) > this.currentPage){
     this.getAllMovies(event.pageIndex + 1);
     }else{
       const startIndex = event.pageIndex * this.pageSize;
