@@ -16,6 +16,7 @@ export class BrowseMoviesComponent implements OnInit {
   activeMode = '';
   acceptableModes = ['all', 'recommended', 'favorites', 'search'];
   dataLoaded = false;
+  isCaching = false;
   movies: Observable<any>;
   favorites = [];
   favoritesMovieInfo: Movie[] = [];
@@ -93,7 +94,7 @@ export class BrowseMoviesComponent implements OnInit {
       idx = 1;
     }
     
-   this.dataLoaded = false;
+   this.isCaching = true;
     this.moviesService.getAllMovies(idx).subscribe(
       data => {
         this.currentPage = (idx-1);
@@ -106,12 +107,12 @@ export class BrowseMoviesComponent implements OnInit {
                  endIndex = this.paginatorCollection.length;
              }
         this.displayMovies = this.paginatorCollection.slice(startIndex, endIndex);
-        this.dataLoaded = true;
+        this.isCaching = false;
         return;
       },
       error => {
         console.log(error as any);
-        this.dataLoaded = true;
+        this.isCaching = false;
       }
     );
   }
