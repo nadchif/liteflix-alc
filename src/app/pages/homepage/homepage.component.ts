@@ -60,7 +60,7 @@ export class HomepageComponent implements OnInit {
       this.currentFavsScrollPos = 0;
     }
     this.currentFavsScrollPos += amt;
-    
+
     this.viewport2.scrollToIndex(this.currentFavsScrollPos);
   }
 
