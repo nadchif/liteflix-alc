@@ -18,7 +18,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import {
   MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule,
-  MatButtonModule, MatFormFieldModule, MatInputModule, MatMenuModule, MatProgressSpinnerModule, MatBadgeModule, MatChipsModule
+  MatButtonModule, MatFormFieldModule, MatInputModule, MatMenuModule,
+  MatProgressSpinnerModule, MatBadgeModule, MatChipsModule, MatPaginatorModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
@@ -62,7 +63,8 @@ import { BrowseMoviesComponent } from './pages/browse-movies/browse-movies.compo
     MatBadgeModule,
     MatChipsModule,
     FormsModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatPaginatorModule
   ],
   providers: [
     UserService,

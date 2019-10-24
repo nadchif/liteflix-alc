@@ -1,3 +1,4 @@
+import { Results } from './../interfaces/results';
 import { Injectable } from '@angular/core';
 import { Observable, throwError, forkJoin } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
@@ -23,6 +24,62 @@ export class MoviedbService {
     return this.http.get(moviesUrl)
       .pipe(
         map(this.extractData),
+        catchError(this.handleError)
+      );
+  }
+  public getAllMovies(page: number): Observable<Results> {
+    const moviesUrl = `${this.url}popular?api_key=${this.apiKey}&language=${this.language}&page=${page > 0 ? page : 1}`;
+    return this.http.get(moviesUrl)
+      .pipe(
+        map((res) => {
+          const body = res;
+          let data;
+          if (body['results'] != undefined) {
+            data = body['results'];
+          } else {
+            data = null;
+          }
+
+          if (data != null) {
+
+            try {
+              let movieCache = {};
+
+              if (!localStorage.getItem('movies')) {
+                console.log('no movies cached yet');
+                Object.keys(data).forEach(i => {
+                  movieCache[data[i].id] = data[i];
+                });
+                localStorage.setItem('movies', JSON.stringify(movieCache));
+              } else {
+                console.log('merge/update cache data');
+                movieCache = JSON.parse(localStorage.getItem('movies'));
+                Object.keys(data).forEach(i => {
+                  movieCache[data[i].id] = data[i];
+                });
+                localStorage.setItem('movies', JSON.stringify(movieCache));
+              }
+
+            } catch (e) {
+              // an error with caching should not halt the program
+              console.log('error caching movie info');
+            }
+          }
+
+
+          return {
+            results: body['results'],
+            page: body['page'],
+            resultsCount: body['total_results'],
+            itemsPerPage: (body['total_results'] / body['total_pages'])
+          } as Results ||
+            {
+              results: [],
+              page: 1,
+              resultsCount: 0,
+              itemsPerPage: 20
+            };
+        }),
         catchError(this.handleError)
       );
   }

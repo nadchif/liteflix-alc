@@ -22,14 +22,13 @@
     <ng-container *ngIf="this.dataLoaded">
         <div class="row equal">
             <div class="col-sm-6 col-md-3" *ngFor="let movie of displayMovies " [style.padding]="'24px'">
-                <!--using router link within cdk-virtual-scroll breaks navigation for some reason-->
-                <a href="{{'/movie/'+movie.id}}">
+                <a routerLink="{{'/movie/'+movie.id}}">
                     <div class="card align-center">
                         <img src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}">
                     </div>
                 </a>
                 <div class="movielabel dim-text">
-                        <a href="{{'/movie/'+movie.id}}">
+                        <a routerLink="{{'/movie/'+movie.id}}">
                     {{movie.title | titlecase}} ({{movie.release_date.split('-')[0]}})
                     </a>
                     <button mat-icon-button (click)="toggleFavorite(movie)" color="warn"><span  [style.font-size]="'16pt'"
@@ -39,6 +38,9 @@
          
             </div>
         </div>
+        <mat-paginator [style.background]="'transparent'" [style.color]="'#ffbb00'" *ngIf="this.activeMode.toLowerCase() == 'all'" [length]="this.resultsCount" [pageSize]="this.pageSize" [pageSizeOptions]="[this.pageSize]"
+        (page)="OnPageChange($event)">
+    </mat-paginator>
     </ng-container>
 
     <app-footer *ngIf="this.dataLoaded"></app-footer>

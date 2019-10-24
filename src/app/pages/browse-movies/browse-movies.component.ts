@@ -26,6 +26,9 @@ export class BrowseMoviesComponent implements OnInit {
   movie = false;
   movieData: any;
   searchQuery = '';
+  currentPage = 1;
+  pageSize = 20;
+  resultsCount = 1;
 
   constructor(
     public moviesService: MoviedbService,
@@ -67,13 +70,43 @@ export class BrowseMoviesComponent implements OnInit {
     this.favorites = this.user.getUserFavorites();
     this.refreshFavoritesInfo();
   }
+  OnPageChange(event) {
+    window.scroll(0, 0);
+    this.getAllMovies(event.pageIndex + 1);
+  }
+  getAllMovies(page?: number) {
+    let idx;
+    if (page > 0) {
+      idx = page;
+    } else {
+      idx = 1;
+    }
+    this.moviesService.getAllMovies(idx).subscribe(
+      data => {
+        this.currentPage = data.page;
+        this.resultsCount = data.resultsCount;
+        this.displayMovies = data.results;
+        this.pageSize = data.itemsPerPage;
+        this.dataLoaded = true;
+        return;
+      },
+      error => {
+        console.log(error as any);
+        this.dataLoaded = true;
+      }
+    );
+  }
   getMovies(query = null) {
 
-    if (this.activeMode.toLowerCase() == 'all' ||
+    if (
       this.activeMode.toLowerCase() == 'recommended' || this.activeMode.toLowerCase() == 'favorites') {
       this.movies = this.moviesService.getMovies();
     }
 
+    if (this.activeMode.toLowerCase() == 'all') {
+      this.getAllMovies(1);
+      return;
+    }
     if (this.activeMode == 'find') {
       if (query.toLowerCase() == 'newsearch') {
         this.dataLoaded = true;

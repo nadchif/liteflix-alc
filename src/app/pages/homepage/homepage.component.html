@@ -34,8 +34,8 @@
                     <h3 class="slide-out-blurred-left" (click)="scrollCarousel(-1)"><span
                             class="glyphicon glyphicon glyphicon-chevron-left" aria-hidden="true"></span></h3>
                 </div>
-                <cdk-virtual-scroll-viewport #topRated orientation="horizontal" itemSize="200" minBufferPx="50" maxBufferPx="150"
-                    class="moviesStrip">
+                <cdk-virtual-scroll-viewport #topRated orientation="horizontal" itemSize="200" minBufferPx="50"
+                    maxBufferPx="150" class="moviesStrip">
                     <div class="cover align-right" *cdkVirtualFor="let movie of movies | async ; templateCacheSize: 0"
                         [style.display]="'inline-block'" [style.padding]="'10px'">
 
@@ -69,45 +69,43 @@
             <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
             Your Favorites</h2>
 
-            <div class="noFavs" *ngIf="favorites.length < 1">
-                    No favorites yet! :-)
-                </div>
+        <div class="noFavs" *ngIf="favorites.length < 1">
+            No favorites yet! :-)
+        </div>
 
-            <div class="flex-parent" *ngIf="favorites.length > 0">
-                        
-                <div class="scroll-indicator leftPadding">
-                    <h3 class="slide-out-blurred-left" (click)="scrollFavsCarousel(-1)"><span
-                            class="glyphicon glyphicon glyphicon-chevron-left" aria-hidden="true"></span></h3>
-                </div>
-                <cdk-virtual-scroll-viewport #userFavorites orientation="horizontal" itemSize="200" minBufferPx="50" maxBufferPx="150"
-                    class="moviesStrip">
-                    <div class="cover align-left"
-                        *cdkVirtualFor="let movie of this.favoritesMovieInfo; templateCacheSize: 0"
-                        [style.display]="'inline-block'" [style.padding]="'10px'">
-                        <!--using router link within cdk-virtual-scroll breaks navigation for some reason-->
-                        <a href="{{'/movie/'+movie.id}}">
-                            <div class="image">
-                                <img *ngIf="movie.poster_path" [style.height]="'200px'"
-                                    src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}">
-                                <img *ngIf="!movie.poster_path" [style.height]="'180px'"
-                                    src="https://placehold.it/500x740">
-                            </div>
-                        </a>
-                        <button mat-button type="button" color="accent"
-                            (click)="this.moviesService.watchTrailer(movie)">
-                            &nbsp;<small><span class="glyphicon glyphicon-play" aria-hidden="true"></span>
-                            </small>&nbsp;Trailer &nbsp;&nbsp;</button>
-                        <button [style.float]="'right'" mat-icon-button color="warn" (click)="toggleFavorite(movie)">
-                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-                    </div>
-                </cdk-virtual-scroll-viewport>
-                <div class="scroll-indicator rightPadding">
-                    <h3 class="slide-out-blurred-right" (click)="scrollFavsCarousel(1)"><span
-                            class="glyphicon glyphicon glyphicon-chevron-right" aria-hidden="true"></span></h3>
-                </div>
+        <div class="flex-parent" *ngIf="favorites.length > 0">
+
+            <div class="scroll-indicator leftPadding">
+                <h3 class="slide-out-blurred-left" (click)="scrollFavsCarousel(-1)"><span
+                        class="glyphicon glyphicon glyphicon-chevron-left" aria-hidden="true"></span></h3>
             </div>
-            
-     
+            <cdk-virtual-scroll-viewport #userFavorites orientation="horizontal" itemSize="200" minBufferPx="50"
+                maxBufferPx="150" class="moviesStrip">
+                <div class="cover align-left"
+                    *cdkVirtualFor="let movie of this.favoritesMovieInfo; templateCacheSize: 0"
+                    [style.display]="'inline-block'" [style.padding]="'10px'">
+                    <!--using router link within cdk-virtual-scroll breaks navigation for some reason-->
+                    <a href="{{'/movie/'+movie.id}}">
+                        <div class="image">
+                            <img *ngIf="movie.poster_path" [style.height]="'200px'"
+                                src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}">
+                            <img *ngIf="!movie.poster_path" [style.height]="'180px'" src="https://placehold.it/500x740">
+                        </div>
+                    </a>
+                    <button mat-button type="button" color="accent" (click)="this.moviesService.watchTrailer(movie)">
+                        &nbsp;<small><span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                        </small>&nbsp;Trailer &nbsp;&nbsp;</button>
+                    <button [style.float]="'right'" mat-icon-button color="warn" (click)="toggleFavorite(movie)">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                </div>
+            </cdk-virtual-scroll-viewport>
+            <div class="scroll-indicator rightPadding">
+                <h3 class="slide-out-blurred-right" (click)="scrollFavsCarousel(1)"><span
+                        class="glyphicon glyphicon glyphicon-chevron-right" aria-hidden="true"></span></h3>
+            </div>
+        </div>
+
+
     </section>
     <!--end Favorites section-->
 </div>
