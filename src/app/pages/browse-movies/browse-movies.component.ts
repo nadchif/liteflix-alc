@@ -92,8 +92,8 @@ export class BrowseMoviesComponent implements OnInit {
         this.paginatorCollection = this.paginatorCollection.concat(data.results);
             const startIndex = idx * this.pageSize;
              let endIndex = startIndex + this.pageSize;
-             if (endIndex > this.displayMovies.length) {
-                 endIndex = this.displayMovies.length;
+             if (endIndex > this.paginatorCollection.length) {
+                 endIndex = this.paginatorCollection.length;
              }
         this.displayMovies = this.paginatorCollection.slice(startIndex, endIndex);
         this.dataLoaded = true;
