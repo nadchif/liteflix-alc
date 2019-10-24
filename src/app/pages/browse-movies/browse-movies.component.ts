@@ -87,7 +87,7 @@ export class BrowseMoviesComponent implements OnInit {
     }
     this.moviesService.getAllMovies(idx).subscribe(
       data => {
-        this.currentPage = data.page;
+        this.currentPage = idx;
         this.resultsCount = data.resultsCount;
         this.displayMovies = this.displayMovies.concat(data.results);
         this.pageSize = data.itemsPerPage;
