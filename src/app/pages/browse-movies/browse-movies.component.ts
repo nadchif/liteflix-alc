@@ -21,6 +21,7 @@ export class BrowseMoviesComponent implements OnInit {
   favoritesMovieInfo: Movie[] = [];
   displayMovies: Movie[] = [];
   cachedMoviesInfo: Movie[] = [];
+  paginatorCollection: Movie[] = [];
   language: string;
   sort: number;
   movie = false;
@@ -86,9 +87,15 @@ export class BrowseMoviesComponent implements OnInit {
     this.moviesService.getAllMovies(idx).subscribe(
       data => {
         this.currentPage = (idx-1);
-        this.resultsCount = data.resultsCount;
-        this.displayMovies = this.displayMovies.concat(data.results);
         this.pageSize = data.itemsPerPage;
+        this.resultsCount = data.resultsCount;
+        this.paginatorCollection = this.paginatorCollection.concat(data.results);
+            const startIndex = idx * this.pageSize;
+             let endIndex = startIndex + this.pageSize;
+             if (endIndex > this.displayMovies.length) {
+                 endIndex = this.displayMovies.length;
+             }
+        this.displayMovies = this.displayMovies.slice(startIndex, endIndex);
         this.dataLoaded = true;
         return;
       },
