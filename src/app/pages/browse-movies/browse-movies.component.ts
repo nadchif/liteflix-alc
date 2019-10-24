@@ -72,7 +72,9 @@ export class BrowseMoviesComponent implements OnInit {
   }
   OnPageChange(event) {
     window.scroll(0, 0);
+    if((event.pageIndex + 1) > this.currentPage){
     this.getAllMovies(event.pageIndex + 1);
+    }
   }
   getAllMovies(page?: number) {
 
@@ -87,7 +89,7 @@ export class BrowseMoviesComponent implements OnInit {
       data => {
         this.currentPage = data.page;
         this.resultsCount = data.resultsCount;
-        this.displayMovies = data.results;
+        this.displayMovies = this.displayMovies.concat(data.results);
         this.pageSize = data.itemsPerPage;
         this.dataLoaded = true;
         return;
